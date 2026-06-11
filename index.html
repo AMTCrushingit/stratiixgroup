@@ -84,19 +84,78 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background-image: url('hero-bg.png?expires=1783664875&signature=fc58d67ce9e48eaf23844a71a9daa8d5f9bdf5a6564ea0456e7b1909c1fc7828');
-    background-size: cover; background-position: center top;
+    background: #0D1520;
     z-index: 0;
+  }
+  /* Animated gradient orbs */
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    z-index: 0;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(13,148,136,0.5) 0%, transparent 70%);
+    top: -150px; left: -100px;
+    animation: orbFloat1 12s ease-in-out infinite;
+  }
+  .hero-orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(91,184,168,0.3) 0%, transparent 70%);
+    bottom: -100px; right: -80px;
+    animation: orbFloat2 15s ease-in-out infinite;
+  }
+  .hero-orb-3 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(201,168,106,0.15) 0%, transparent 70%);
+    top: 40%; left: 60%;
+    animation: orbFloat3 18s ease-in-out infinite;
+  }
+  @keyframes orbFloat1 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(60px,-40px) scale(1.1); }
+    66% { transform: translate(-30px,60px) scale(0.95); }
+  }
+  @keyframes orbFloat2 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(-50px,30px) scale(1.08); }
+    66% { transform: translate(40px,-50px) scale(0.92); }
+  }
+  @keyframes orbFloat3 {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-40px,-30px) scale(1.15); }
+  }
+  /* Grid overlay */
+  .hero-grid-overlay {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(13,148,136,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,148,136,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 1;
+    mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 20%, transparent 100%);
+  }
+  /* Floating particles */
+  .hero-particles { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  .particle {
+    position: absolute;
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: rgba(13,148,136,0.6);
+    animation: particleFloat linear infinite;
+  }
+  @keyframes particleFloat {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
   }
   .hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(
-      160deg,
-      rgba(13,26,45,0.93) 0%,
-      rgba(13,26,45,0.88) 50%,
-      rgba(13,148,136,0.15) 100%
-    );
-    z-index: 1;
+    background: linear-gradient(180deg, transparent 60%, rgba(13,21,32,0.8) 100%);
+    z-index: 2;
   }
   .hero-content { position: relative; z-index: 2; max-width: 880px; }
 
@@ -378,6 +437,43 @@
     .ladder-grid { grid-template-columns: repeat(2,1fr); }
     .principles-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+  .fade-up-delay-3 { transition-delay: 0.3s; }
+  .scale-in { opacity: 0; transform: scale(0.92); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .scale-in.visible { opacity: 1; transform: scale(1); }
+  /* Shimmer on diagram cards */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .diagram-glow {
+    position: relative;
+  }
+  .diagram-glow::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 21px;
+    background: linear-gradient(90deg, transparent, rgba(13,148,136,0.15), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 4s linear infinite;
+    pointer-events: none;
+  }
+  /* Floating animation for hero content */
+  @keyframes heroFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .hero-content { animation: heroFloat 6s ease-in-out infinite; }
+
+
+  .btn-pay:hover { background: #B8924E !important; transform: translateY(-2px) !important; box-shadow: 0 8px 32px rgba(201,168,106,0.5) !important; }
+
 </style>
 </head>
 <body>
@@ -426,6 +522,7 @@
     </p>
 <div class="hero-ctas">
 <a class="btn-primary" href="booking.html">Book the Stratiix Path Diagnostic™</a>
+<a href="booking.html" style="background:var(--gold);color:#1E1F22;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;box-shadow:0 4px 24px rgba(201,168,106,0.35);transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:8px;">&#128179; Pay &amp; Sign Now</a>
 <a class="btn-ghost" href="#levels">See Two Levels of Impact →</a>
 </div>
 <div class="hero-stats">
@@ -450,10 +547,10 @@
 </div>
 </div>
 <div class="problem-cards">
-<div class="problem-card"><div class="pc-icon">⚡</div><div><div class="pc-title">Workflows break under growth</div><div class="pc-desc">What worked at 5 people doesn't work at 15. Manual processes create bottlenecks that slow everything down.</div></div></div>
-<div class="problem-card"><div class="pc-icon">📡</div><div><div class="pc-title">Communication fragments</div><div class="pc-desc">Teams operate in silos. Decisions get made in hallways. Alignment disappears as the organization grows.</div></div></div>
-<div class="problem-card"><div class="pc-icon">🎯</div><div><div class="pc-title">Delivery becomes unpredictable</div><div class="pc-desc">Without systems, execution depends on who's available and how much energy the founder has that week.</div></div></div>
-<div class="problem-card"><div class="pc-icon">🔒</div><div><div class="pc-title">The founder becomes the bottleneck</div><div class="pc-desc">Every decision, every approval, every escalation lands on one desk. The business can't move without you.</div></div></div>
+<div class="problem-card fade-up"><div class="pc-icon">⚡</div><div><div class="pc-title">Workflows break under growth</div><div class="pc-desc">What worked at 5 people doesn't work at 15. Manual processes create bottlenecks that slow everything down.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-1"><div class="pc-icon">📡</div><div><div class="pc-title">Communication fragments</div><div class="pc-desc">Teams operate in silos. Decisions get made in hallways. Alignment disappears as the organization grows.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-2"><div class="pc-icon">🎯</div><div><div class="pc-title">Delivery becomes unpredictable</div><div class="pc-desc">Without systems, execution depends on who's available and how much energy the founder has that week.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-3"><div class="pc-icon">🔒</div><div><div class="pc-title">The founder becomes the bottleneck</div><div class="pc-desc">Every decision, every approval, every escalation lands on one desk. The business can't move without you.</div></div></div>
 </div>
 </div>
 </div>
@@ -465,7 +562,7 @@
 <h2 class="section-title levels-title">The same OS.<br/>Two levels of transformation.</h2>
 <p class="section-sub levels-sub">The same Operating System that frees a founder from being the bottleneck also builds the infrastructure that connects regions. One system. Two levels of transformation.</p>
 <div class="levels-grid">
-<div class="level-card l1">
+<div class="level-card l1 fade-up">
 <div class="level-card-header l1h">
 <div class="level-icon-wrap">🏢</div>
 <div class="level-num">Organizational Impact — Level 1</div>
@@ -484,7 +581,7 @@
 <a class="level-cta" href="booking.html">Explore Organizational Impact</a>
 </div>
 </div>
-<div class="level-card l2">
+<div class="level-card l2 fade-up fade-up-delay-2">
 <div class="level-card-header l2h">
 <div class="level-icon-wrap">🌐</div>
 <div class="level-num">Regional Impact — Level 2</div>
@@ -520,7 +617,7 @@
 </div>
 <div>
 <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:18px;">The Stratiix Path™ — One Methodology</div>
-<div style="background:#1E1F22;border-radius:20px;padding:32px 28px;box-shadow:0 8px 40px rgba(0,0,0,0.25);">
+<div class="scale-in diagram-glow" style="background:#1E1F22;border-radius:20px;padding:32px 28px;box-shadow:0 8px 40px rgba(0,0,0,0.25);">
   <div style="background:#0D9488;border-radius:14px;padding:20px 24px;margin-bottom:8px;">
     <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.6);margin-bottom:6px;">Entry Point — Every Engagement Starts Here</div>
     <div style="font-size:17px;font-weight:900;color:#fff;margin-bottom:14px;">Stratiix Path Diagnostic™</div>
@@ -580,7 +677,7 @@
       <p style="font-size:16px;line-height:1.7;color:rgba(255,255,255,0.5);max-width:580px;margin:0 auto;">The Stratiix Path Diagnostic™, The Stratiix Path™, and the Stratiix OS™ are three distinct named assets — each with a defined role — together forming the complete Stratiix architecture.</p>
     </div>
     <div style="position:relative;border-radius:24px;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,0.5);">
-<div style="background:#1E1F22;border-radius:24px;padding:48px;box-shadow:0 20px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden;">
+<div class="scale-in diagram-glow" style="background:#1E1F22;border-radius:24px;padding:48px;box-shadow:0 20px 80px rgba(0,0,0,0.4);position:relative;overflow:hidden;">
   <!-- Background glow -->
   <div style="position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(13,148,136,0.12) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:-60px;left:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(201,168,106,0.07) 0%,transparent 70%);pointer-events:none;"></div>
@@ -667,12 +764,12 @@
 <h2 class="section-title modules-title">Six modules. Built to<br/>plug into your reality.</h2>
 <p class="section-sub modules-sub">Modular by design. Every module addresses a specific breakdown — and every module connects to the others.</p>
 <div class="modules-grid">
-<div class="mod-card"><div class="mod-num">01</div><div class="mod-icon">⚡</div><div class="mod-name">Automate</div><div class="mod-desc">Streamline workflows with zero-code logic. Remove manual friction so teams move faster without adding headcount.</div></div>
-<div class="mod-card"><div class="mod-num">02</div><div class="mod-icon">🏛️</div><div class="mod-name">Govern</div><div class="mod-desc">Embed accountability with clear roles and rituals. Decisions get made. Ownership is visible. Nothing falls through.</div></div>
-<div class="mod-card"><div class="mod-num">03</div><div class="mod-icon">🔒</div><div class="mod-name">Stabilize</div><div class="mod-desc">Secure and stabilize systems so they scale. Infrastructure that holds under pressure and grows with the organization.</div></div>
-<div class="mod-card"><div class="mod-num">04</div><div class="mod-icon">📊</div><div class="mod-name">Financial Clarity</div><div class="mod-desc">Visibility into numbers so decisions improve. Leaders see performance without digging — and act with confidence.</div></div>
-<div class="mod-card"><div class="mod-num">05</div><div class="mod-icon">📡</div><div class="mod-name">Alignment &amp; Adoption</div><div class="mod-desc">Scalable internal communication and alignment. Teams stay informed, coordinated, and moving in the same direction.</div></div>
-<div class="mod-card"><div class="mod-num">06</div><div class="mod-icon">🎨</div><div class="mod-name">Design</div><div class="mod-desc">Systems and templates that scale with the team. Consistency in how work looks, flows, and gets delivered.</div></div>
+<div class="mod-card fade-up"><div class="mod-num">01</div><div class="mod-icon">⚡</div><div class="mod-name">Automate</div><div class="mod-desc">Streamline workflows with zero-code logic. Remove manual friction so teams move faster without adding headcount.</div></div>
+<div class="mod-card fade-up fade-up-delay-1"><div class="mod-num">02</div><div class="mod-icon">🏛️</div><div class="mod-name">Govern</div><div class="mod-desc">Embed accountability with clear roles and rituals. Decisions get made. Ownership is visible. Nothing falls through.</div></div>
+<div class="mod-card fade-up fade-up-delay-2"><div class="mod-num">03</div><div class="mod-icon">🔒</div><div class="mod-name">Stabilize</div><div class="mod-desc">Secure and stabilize systems so they scale. Infrastructure that holds under pressure and grows with the organization.</div></div>
+<div class="mod-card fade-up"><div class="mod-num">04</div><div class="mod-icon">📊</div><div class="mod-name">Financial Clarity</div><div class="mod-desc">Visibility into numbers so decisions improve. Leaders see performance without digging — and act with confidence.</div></div>
+<div class="mod-card fade-up fade-up-delay-1"><div class="mod-num">05</div><div class="mod-icon">📡</div><div class="mod-name">Alignment &amp; Adoption</div><div class="mod-desc">Scalable internal communication and alignment. Teams stay informed, coordinated, and moving in the same direction.</div></div>
+<div class="mod-card fade-up fade-up-delay-2"><div class="mod-num">06</div><div class="mod-icon">🎨</div><div class="mod-name">Design</div><div class="mod-desc">Systems and templates that scale with the team. Consistency in how work looks, flows, and gets delivered.</div></div>
 </div>
 </div>
 </section>
@@ -734,10 +831,10 @@
 <span class="section-eyebrow principles-eyebrow">Always True</span>
 <h2 class="section-title principles-title">How Stratiix thinks,<br/>speaks, and works.</h2>
 <div class="principles-grid">
-<div class="prin-card"><div class="prin-icon">🔍</div><div class="prin-name">Clarity Over Complexity</div><div class="prin-desc">Every system we build makes things simpler, not harder.</div></div>
-<div class="prin-card"><div class="prin-icon">🔓</div><div class="prin-name">Systems Create Freedom</div><div class="prin-desc">Structure liberates founders from being the bottleneck.</div></div>
-<div class="prin-card"><div class="prin-icon">🧩</div><div class="prin-name">Modularity Always</div><div class="prin-desc">Every module plugs into reality — no one-size-fits-all.</div></div>
-<div class="prin-card"><div class="prin-icon">🤝</div><div class="prin-name">Empathy Before Execution</div><div class="prin-desc">We understand the organization before we build anything.</div></div>
+<div class="prin-card fade-up"><div class="prin-icon">🔍</div><div class="prin-name">Clarity Over Complexity</div><div class="prin-desc">Every system we build makes things simpler, not harder.</div></div>
+<div class="prin-card fade-up fade-up-delay-1"><div class="prin-icon">🔓</div><div class="prin-name">Systems Create Freedom</div><div class="prin-desc">Structure liberates founders from being the bottleneck.</div></div>
+<div class="prin-card fade-up fade-up-delay-2"><div class="prin-icon">🧩</div><div class="prin-name">Modularity Always</div><div class="prin-desc">Every module plugs into reality — no one-size-fits-all.</div></div>
+<div class="prin-card fade-up fade-up-delay-3"><div class="prin-icon">🤝</div><div class="prin-name">Empathy Before Execution</div><div class="prin-desc">We understand the organization before we build anything.</div></div>
 <div class="prin-card"><div class="prin-icon">🚀</div><div class="prin-name">Momentum Is the Product</div><div class="prin-desc">The measure of success is forward movement, not deliverables.</div></div>
 </div>
 </div>
@@ -802,6 +899,66 @@
     document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
     if (!isOpen) item.classList.add('open');
   }
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.fade-up, .scale-in').forEach(el => observer.observe(el));
+
+  // ── HERO PARTICLES ──
+  const container = document.getElementById('heroParticles');
+  if (container) {
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+      p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      p.style.animationDelay = (Math.random() * 15) + 's';
+      p.style.opacity = Math.random() * 0.6 + 0.2;
+      container.appendChild(p);
+    }
+  }
+
+  // ── HERO HEADLINE TYPEWRITER EFFECT ──
+  const heroSub = document.querySelector('.hero-sub');
+  if (heroSub) {
+    heroSub.style.opacity = '0';
+    heroSub.style.transform = 'translateY(20px)';
+    heroSub.style.transition = 'opacity 1s ease 0.8s, transform 1s ease 0.8s';
+    setTimeout(() => {
+      heroSub.style.opacity = '';
+      heroSub.style.transform = '';
+    }, 100);
+  }
+
+  // ── COUNTER ANIMATION FOR STATS ──
+  const statVals = document.querySelectorAll('.stat-val');
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.textContent);
+        if (!isNaN(target) && target > 0) {
+          let current = 0;
+          const step = target / 20;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { el.textContent = target; clearInterval(timer); }
+            else { el.textContent = Math.ceil(current); }
+          }, 50);
+        }
+        statsObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statVals.forEach(el => statsObserver.observe(el));
 </script>
 </body>
 </html>
