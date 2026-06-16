@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Stratiix Services — Transformation begins with clarity. Every engagement begins with the Stratiix Diagnostic. We build the systems that make your organization work." name="description"/>
+<meta content="Stratiix Services — Organizational Transformation" property="og:title"/>
+<meta content="We don't sell services. We build the systems that make your organization work." property="og:description"/>
+<meta content="website" property="og:type"/>
+<title>Stratiix Services — Organizational Transformation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: #FFFFFF; color: #1E1F22; overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
+
+  :root {
+    --charcoal:      #1E1F22;
+    --charcoal-mid:  #2C2D31;
+    --charcoal-soft: #3A3B40;
+    --mint:          #E9F7F3;
+    --mint-mid:      #C8EDE4;
+    --mint-deep:     #5BB8A8;
+    --slate:         #F3F4F6;
+    --slate-mid:     #E5E7EB;
+    --teal:          #0D9488;
+    --teal-dark:     #0F766E;
+    --teal-light:    #CCFBF1;
+    --teal-xlight:   #F0FDFA;
+    --gold:          #C9A86A;
+    --gold-light:    #F5ECD9;
+    --white:         #FFFFFF;
+    --body-text:     #4B4C51;
+    --muted:         #6B7280;
+  }
+
+  /* ── NAV ── */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--slate-mid); }
+  .nav-logo-text { font-size: 20px; font-weight: 600; color: var(--charcoal); letter-spacing: 0.3px; }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-link { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+  .nav-link:hover { color: var(--charcoal); }
+  .nav-link.active { color: var(--teal); font-weight: 700; }
+  .nav-cta { background: var(--teal); color: #fff; font-size: 13px; font-weight: 700; padding: 10px 22px; border-radius: 10px; transition: background 0.2s, transform 0.15s; }
+  .nav-cta:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; }
+  .mobile-nav { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(255,255,255,0.99); backdrop-filter: blur(20px); border-bottom: 1px solid var(--slate-mid); padding: 20px 24px; flex-direction: column; gap: 16px; z-index: 99; }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav-link { font-size: 15px; font-weight: 600; color: var(--charcoal); padding: 10px 0; border-bottom: 1px solid var(--slate-mid); }
+  .mobile-nav-cta { background: var(--teal); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 24px; border-radius: 10px; text-align: center; margin-top: 4px; }
+
+  /* ── HELPERS ── */
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+  .section-pad { padding: 100px 0; }
+  .eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; display: block; margin-bottom: 14px; }
+  .section-title { font-size: 42px; font-weight: 900; line-height: 1.1; letter-spacing: -1px; margin-bottom: 16px; }
+  .section-sub { font-size: 16px; line-height: 1.7; color: var(--body-text); max-width: 600px; }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-left.visible { opacity: 1; transform: translateX(0); }
+  .fade-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-right.visible { opacity: 1; transform: translateX(0); }
+  .scale-in { opacity: 0; transform: scale(0.94); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .scale-in.visible { opacity: 1; transform: scale(1); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.4s; }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; background: #0D1520; }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5; z-index: 0; }
+  .hero-orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(13,148,136,0.5) 0%, transparent 70%); top: -150px; left: -100px; animation: orbFloat1 12s ease-in-out infinite; }
+  .hero-orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(91,184,168,0.3) 0%, transparent 70%); bottom: -100px; right: -80px; animation: orbFloat2 15s ease-in-out infinite; }
+  .hero-orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(201,168,106,0.12) 0%, transparent 70%); top: 40%; left: 60%; animation: orbFloat3 18s ease-in-out infinite; }
+  @keyframes orbFloat1 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(60px,-40px) scale(1.1); } 66% { transform: translate(-30px,60px) scale(0.95); } }
+  @keyframes orbFloat2 { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(-50px,30px) scale(1.08); } 66% { transform: translate(40px,-50px) scale(0.92); } }
+  @keyframes orbFloat3 { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-40px,-30px) scale(1.15); } }
+  .hero-grid-overlay { position: absolute; inset: 0; background-image: linear-gradient(rgba(13,148,136,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(13,148,136,0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: 1; mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 20%, transparent 100%); }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(13,21,32,0.8) 100%); z-index: 2; }
+  .hero-content { position: relative; z-index: 3; max-width: 860px; animation: heroFloat 6s ease-in-out infinite; }
+  @keyframes heroFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 6px 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+  .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.75); } }
+  .hero h1 { font-size: 62px; font-weight: 900; line-height: 1.05; letter-spacing: -2px; color: #fff; margin-bottom: 12px; }
+  .hero h1 span { color: var(--mint-deep); }
+  .hero-tagline { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: -0.3px; margin-bottom: 28px; display: block; font-style: italic; }
+  .hero p { font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 640px; margin: 0 auto 40px; }
+  .hero p strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+  .hero-ctas { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn-teal { background: var(--teal); color: #fff; font-size: 15px; font-weight: 700; padding: 16px 32px; border-radius: 12px; box-shadow: 0 4px 24px rgba(13,148,136,0.4); transition: background 0.2s, transform 0.15s; }
+  .btn-teal:hover { background: var(--teal-dark); transform: translateY(-2px); }
+  .btn-ghost { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 600; padding: 16px 32px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); transition: background 0.2s, transform 0.15s; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+
+  /* ── INTRO STATEMENT ── */
+  .intro-section { background: var(--white); }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .intro-left {}
+  .intro-statement { font-size: 28px; font-weight: 800; color: var(--charcoal); line-height: 1.35; letter-spacing: -0.5px; margin-bottom: 24px; }
+  .intro-statement span { color: var(--teal); }
+  .intro-body { font-size: 15px; color: var(--body-text); line-height: 1.8; margin-bottom: 20px; }
+  .intro-quote { background: var(--charcoal); border-radius: 18px; padding: 32px; border-left: 4px solid var(--gold); }
+  .intro-quote-text { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.85); line-height: 1.55; font-style: italic; margin-bottom: 12px; }
+  .intro-quote-attr { font-size: 11px; color: var(--gold); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Intro right — visual stat blocks */
+  .intro-right { display: flex; flex-direction: column; gap: 16px; }
+  .intro-stat { background: var(--slate); border: 1.5px solid var(--slate-mid); border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 20px; transition: border-color 0.2s, transform 0.2s; }
+  .intro-stat:hover { border-color: var(--teal); transform: translateX(6px); }
+  .intro-stat-icon { font-size: 28px; flex-shrink: 0; width: 56px; height: 56px; background: var(--teal-xlight); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+  .intro-stat-title { font-size: 14px; font-weight: 800; color: var(--charcoal); margin-bottom: 4px; }
+  .intro-stat-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── DIAGNOSTIC GATEWAY ── */
+  .diag-section { background: var(--charcoal); }
+  .diag-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .diag-left {}
+  .diag-visual { background: #1A1B1F; border-radius: 24px; padding: 36px; position: relative; overflow: hidden; }
+  .diag-visual-glow { position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(13,148,136,0.2) 0%, transparent 70%); pointer-events: none; }
+  .diag-visual-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
+  .diag-entry { background: var(--teal); border-radius: 14px; padding: 20px 22px; margin-bottom: 12px; }
+  .diag-entry-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.65); margin-bottom: 6px; }
+  .diag-entry-title { font-size: 18px; font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .diag-entry-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .diag-entry-tag { background: rgba(255,255,255,0.18); border-radius: 6px; padding: 3px 9px; font-size: 10px; font-weight: 700; color: #fff; }
+  .diag-arrow { display: flex; justify-content: center; padding: 8px 0; }
+  .diag-arrow-line { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .diag-arrow-shaft { width: 2px; height: 20px; background: rgba(255,255,255,0.15); }
+  .diag-arrow-head { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid rgba(255,255,255,0.15); }
+  .diag-outcomes { display: flex; flex-direction: column; gap: 8px; }
+  .diag-outcome { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; transition: border-color 0.2s; }
+  .diag-outcome:hover { border-color: rgba(13,148,136,0.3); }
+  .diag-outcome-icon { font-size: 16px; flex-shrink: 0; }
+  .diag-outcome-text { font-size: 12.5px; color: rgba(255,255,255,0.65); font-weight: 500; }
+  .diag-result { margin-top: 16px; background: rgba(201,168,106,0.08); border: 1px solid rgba(201,168,106,0.2); border-radius: 10px; padding: 12px 16px; }
+  .diag-result-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px; }
+  .diag-result-text { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+  /* ── FOUR OUTCOMES ── */
+  .outcomes-section { background: var(--slate); }
+  .outcomes-intro { text-align: center; max-width: 680px; margin: 0 auto 60px; }
+  .outcomes-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+  .outcome-card { background: var(--white); border: 1.5px solid var(--slate-mid); border-radius: 22px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+  .outcome-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(30,31,34,0.1); border-color: var(--teal); }
+  .outcome-card-header { padding: 32px 32px 24px; position: relative; overflow: hidden; }
+  .oc1 .outcome-card-header { background: var(--teal-xlight); border-bottom: 1px solid var(--teal-light); }
+  .oc2 .outcome-card-header { background: var(--mint); border-bottom: 1px solid var(--mint-mid); }
+  .oc3 .outcome-card-header { background: var(--gold-light); border-bottom: 1px solid rgba(201,168,106,0.3); }
+  .oc4 .outcome-card-header { background: var(--slate); border-bottom: 1px solid var(--slate-mid); }
+  .outcome-num { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -3px; position: absolute; top: 16px; right: 24px; opacity: 0.08; color: var(--charcoal); }
+  .outcome-icon { font-size: 32px; margin-bottom: 12px; }
+  .outcome-title { font-size: 22px; font-weight: 900; color: var(--charcoal); margin-bottom: 6px; }
+  .outcome-subtitle { font-size: 12px; font-weight: 600; font-style: italic; }
+  .oc1 .outcome-subtitle { color: var(--teal-dark); }
+  .oc2 .outcome-subtitle { color: var(--mint-deep); }
+  .oc3 .outcome-subtitle { color: #92400E; }
+  .oc4 .outcome-subtitle { color: var(--muted); }
+  .outcome-card-body { padding: 28px 32px 32px; }
+  .outcome-desc { font-size: 14px; color: var(--body-text); line-height: 1.75; margin-bottom: 20px; }
+  .outcome-points { display: flex; flex-direction: column; gap: 8px; }
+  .outcome-point { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--body-text); line-height: 1.5; }
+  .outcome-point-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; margin-top: 6px; }
+
+  /* ── WHAT ENGAGEMENTS INCLUDE ── */
+  .include-section { background: var(--white); }
+  .include-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .include-left {}
+  .include-note { background: var(--mint); border: 1.5px solid var(--mint-mid); border-radius: 14px; padding: 20px 24px; margin-top: 28px; }
+  .include-note-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--teal-dark); margin-bottom: 6px; }
+  .include-note-text { font-size: 13px; color: var(--body-text); line-height: 1.6; }
+  .include-right { display: flex; flex-direction: column; gap: 10px; }
+  .include-item { background: var(--slate); border: 1.5px solid var(--slate-mid); border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; transition: border-color 0.2s, transform 0.2s, background 0.2s; cursor: default; }
+  .include-item:hover { border-color: var(--teal); background: var(--teal-xlight); transform: translateX(4px); }
+  .include-item-icon { font-size: 20px; flex-shrink: 0; width: 44px; height: 44px; background: var(--white); border-radius: 11px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(30,31,34,0.06); }
+  .include-item-text { font-size: 13.5px; font-weight: 600; color: var(--charcoal); }
+  .include-ip-box { background: var(--charcoal); border-radius: 16px; padding: 24px 28px; margin-top: 16px; border-left: 3px solid var(--gold); }
+  .include-ip-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 8px; }
+  .include-ip-text { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+  /* ── ENGAGEMENT APPROACH ── */
+  .approach-section { background: var(--charcoal); }
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .approach-steps { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+  .approach-step { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 16px; transition: border-color 0.2s, background 0.2s; }
+  .approach-step:hover { border-color: rgba(13,148,136,0.3); background: rgba(13,148,136,0.04); }
+  .approach-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 13px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .approach-step-title { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .approach-step-desc { font-size: 12.5px; color: rgba(255,255,255,0.45); line-height: 1.55; }
+  /* Approach right — evaluation areas */
+  .approach-eval { background: #1A1B1F; border-radius: 24px; padding: 36px; }
+  .approach-eval-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.25); margin-bottom: 24px; }
+  .approach-eval-items { display: flex; flex-direction: column; gap: 12px; }
+  .approach-eval-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; transition: border-color 0.2s; }
+  .approach-eval-item:hover { border-color: rgba(13,148,136,0.3); }
+  .approach-eval-icon { font-size: 18px; flex-shrink: 0; }
+  .approach-eval-text { flex: 1; }
+  .approach-eval-name { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .approach-eval-desc { font-size: 11px; color: rgba(255,255,255,0.35); line-height: 1.4; }
+  .approach-eval-bar { width: 60px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.08); overflow: hidden; flex-shrink: 0; }
+  .approach-eval-fill { height: 100%; border-radius: 2px; background: var(--teal); }
+  .approach-guarantee { margin-top: 20px; background: rgba(13,148,136,0.08); border: 1px solid rgba(13,148,136,0.2); border-radius: 12px; padding: 16px 20px; }
+  .approach-guarantee-label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mint-deep); margin-bottom: 6px; }
+  .approach-guarantee-text { font-size: 12.5px; color: rgba(255,255,255,0.6); line-height: 1.55; }
+
+  /* ── WHO WE WORK WITH ── */
+  .who-section { background: var(--mint); }
+  .who-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 52px; }
+  .who-card { background: var(--white); border: 1.5px solid var(--mint-mid); border-radius: 18px; padding: 28px 24px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .who-card:hover { border-color: var(--teal); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(13,148,136,0.1); }
+  .who-icon { font-size: 28px; margin-bottom: 14px; }
+  .who-title { font-size: 15px; font-weight: 900; color: var(--charcoal); margin-bottom: 8px; }
+  .who-desc { font-size: 13px; color: var(--body-text); line-height: 1.65; }
+  .who-fit { margin-top: 52px; background: var(--charcoal); border-radius: 20px; padding: 36px 40px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .who-fit-text { flex: 1; min-width: 280px; }
+  .who-fit-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 10px; }
+  .who-fit-title { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+  .who-fit-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+  .who-fit-cta { flex-shrink: 0; }
+  .btn-gold { background: var(--gold); color: var(--charcoal); font-size: 14px; font-weight: 700; padding: 14px 28px; border-radius: 11px; transition: background 0.2s, transform 0.15s; display: inline-block; }
+  .btn-gold:hover { background: #B8924E; transform: translateY(-2px); }
+
+  /* ── CLOSING STATEMENT ── */
+  .closing-section { background: var(--white); }
+  .closing-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .closing-words { display: flex; flex-direction: column; gap: 8px; margin: 40px 0; }
+  .closing-word { font-size: 32px; font-weight: 900; letter-spacing: -0.5px; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .closing-word.visible { opacity: 1; transform: translateY(0); }
+  .cw1 { color: var(--charcoal); transition-delay: 0.1s; }
+  .cw2 { color: var(--teal); transition-delay: 0.3s; }
+  .cw3 { color: var(--charcoal-soft); transition-delay: 0.5s; }
+  .closing-divider { width: 60px; height: 3px; background: var(--teal); border-radius: 2px; margin: 32px auto; }
+
+  /* ── CTA ── */
+  .cta-section { background: var(--charcoal); position: relative; overflow: hidden; }
+  .cta-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(13,148,136,0.08) 0%, transparent 70%), radial-gradient(ellipse 30% 30% at 90% 85%, rgba(201,168,106,0.06) 0%, transparent 60%); }
+  .cta-inner { position: relative; z-index: 2; text-align: center; max-width: 720px; margin: 0 auto; }
+  .cta-eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.25); margin-bottom: 20px; display: block; }
+  .cta-headline { font-size: 46px; font-weight: 900; line-height: 1.1; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; }
+  .cta-headline span { color: var(--mint-deep); }
+  .cta-sub { font-size: 16px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 40px; }
+  .cta-btns { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .btn-cta-primary { background: var(--teal); color: #fff; font-size: 16px; font-weight: 700; padding: 18px 40px; border-radius: 13px; box-shadow: 0 4px 28px rgba(13,148,136,0.4); transition: background 0.2s, transform 0.15s; }
+  .btn-cta-primary:hover { background: var(--teal-dark); transform: translateY(-2px); }
+  .btn-cta-gold { background: var(--gold); color: #1E1F22; font-size: 16px; font-weight: 700; padding: 18px 40px; border-radius: 13px; box-shadow: 0 4px 28px rgba(201,168,106,0.3); transition: background 0.2s, transform 0.15s; }
+  .btn-cta-gold:hover { background: #B8924E; transform: translateY(-2px); }
+  .btn-cta-secondary { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.7); font-size: 16px; font-weight: 600; padding: 18px 40px; border-radius: 13px; border: 1px solid rgba(255,255,255,0.12); transition: background 0.2s, transform 0.15s; }
+  .btn-cta-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer { background: #111214; border-top: 1px solid rgba(255,255,255,0.06); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-logo-text { font-size: 18px; font-weight: 600; color: #fff; }
+  .footer-tagline { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 3px; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-link { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.3); transition: color 0.2s; }
+  .footer-link:hover { color: rgba(255,255,255,0.7); }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.18); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero h1 { font-size: 46px; }
+    .section-title { font-size: 34px; }
+    .intro-grid, .diag-inner, .include-grid, .approach-grid { grid-template-columns: 1fr; gap: 48px; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero { padding: 100px 20px 60px; }
+    .hero h1 { font-size: 34px; letter-spacing: -1px; }
+    .wrap { padding: 0 20px; }
+    .section-pad { padding: 64px 0; }
+    .section-title { font-size: 28px; }
+    .who-grid { grid-template-columns: 1fr; }
+    .who-fit { flex-direction: column; gap: 20px; }
+    .closing-word { font-size: 24px; }
+    .cta-headline { font-size: 30px; }
+    .cta-btns { flex-direction: column; align-items: stretch; }
+    .btn-cta-primary, .btn-cta-gold, .btn-cta-secondary { text-align: center; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav id="navbar">
+<a class="nav-logo-text" href="index.html">Stratiix</a>
+<div class="nav-links">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="os.html">The OS</a>
+<a class="nav-link active" href="services.html">Services</a>
+<a class="nav-link" href="index.html#ladder">Service Ladder</a>
+<a class="nav-link" href="booking.html" style="color:var(--teal);font-weight:700;">Diagnostic</a>
+<a class="nav-cta" href="booking.html">Book the Diagnostic</a>
+</div>
+<div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
+</nav>
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+<a class="mobile-nav-link" href="index.html" onclick="toggleMenu()">Home</a>
+<a class="mobile-nav-link" href="os.html" onclick="toggleMenu()">The OS</a>
+<a class="mobile-nav-link" href="services.html" onclick="toggleMenu()">Services</a>
+<a class="mobile-nav-link" href="index.html#ladder" onclick="toggleMenu()">Service Ladder</a>
+<a class="mobile-nav-link" href="booking.html" onclick="toggleMenu()">Diagnostic</a>
+<a class="mobile-nav-cta" href="booking.html" onclick="toggleMenu()">Book the Diagnostic</a>
+</div>
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+<div class="hero-bg">
+<div class="hero-orb hero-orb-1"></div>
+<div class="hero-orb hero-orb-2"></div>
+<div class="hero-orb hero-orb-3"></div>
+</div>
+<div class="hero-grid-overlay"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-eyebrow">
+<div class="eyebrow-dot"></div>
+      Stratiix Services
+    </div>
+<h1>Transformation begins<br/>with <span>clarity.</span></h1>
+<span class="hero-tagline">Clarity begins with the Stratiix Diagnostic.</span>
+<p>
+      Organizations don't fail because of a lack of ambition. They fail because the systems that support ambition — <strong>governance, decision-making, execution, capability</strong> — were never intentionally designed.
+    </p>
+<div class="hero-ctas">
+<a class="btn-teal" href="booking.html">Begin with the Diagnostic</a>
+<a class="btn-ghost" href="#intro">How we work ↓</a>
+</div>
+</div>
+</section>
+<!-- ══ INTRO STATEMENT ══ -->
+<section class="intro-section section-pad" id="intro">
+<div class="wrap">
+<div class="intro-grid">
+<div class="fade-left">
+<span class="eyebrow" style="color:var(--teal);">Our Approach</span>
+<div class="intro-statement">
+          We work with leaders who are ready to strengthen the <span>internal architecture</span> of their organization.
+        </div>
+<p class="intro-body">So they can grow with confidence, consistency, and control. Every engagement begins with the Stratiix Diagnostic — a structured assessment that reveals where friction, misalignment, and structural gaps are slowing the organization down.</p>
+<p class="intro-body">Only after this diagnostic do we design the transformation pathway. This is not a formality. It is the foundation of everything that follows.</p>
+<div class="intro-quote">
+<div class="intro-quote-text">"We don't sell services. We build the systems that make your organization work."</div>
+<div class="intro-quote-attr">— The Stratiix Commitment</div>
+</div>
+</div>
+<div class="intro-right fade-right">
+<div class="intro-stat">
+<div class="intro-stat-icon">🎯</div>
+<div>
+<div class="intro-stat-title">Evidence-Based Engagements</div>
+<div class="intro-stat-desc">Every pathway is grounded in Diagnostic findings — not assumptions, not generic frameworks.</div>
+</div>
+</div>
+<div class="intro-stat">
+<div class="intro-stat-icon">🧩</div>
+<div>
+<div class="intro-stat-title">Modular by Design</div>
+<div class="intro-stat-desc">Your engagement is built from the modules your organization actually needs — in the sequence that makes sense for your context.</div>
+</div>
+</div>
+<div class="intro-stat">
+<div class="intro-stat-icon">🏗️</div>
+<div>
+<div class="intro-stat-title">Systems, Not Advice</div>
+<div class="intro-stat-desc">We install operating infrastructure your team can run. Not a report. Not recommendations. A working system.</div>
+</div>
+</div>
+<div class="intro-stat">
+<div class="intro-stat-icon">🔁</div>
+<div>
+<div class="intro-stat-title">One Repeatable Methodology</div>
+<div class="intro-stat-desc">The Stratiix Path™ — Discover, Design, Deliver, Sustain — is the same across every engagement. Consistency is quality.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ DIAGNOSTIC GATEWAY ══ -->
+<section class="diag-section section-pad" id="diagnostic">
+<div class="wrap">
+<div class="diag-inner">
+<div class="fade-left">
+<span class="eyebrow" style="color:var(--mint-deep);">The Gateway</span>
+<h2 class="section-title" style="color:#fff;">Every engagement begins<br/>with the Diagnostic.</h2>
+<p class="section-sub" style="color:rgba(255,255,255,0.5);margin-bottom:32px;">The Stratiix Diagnostic is not a sales call. It is a structured assessment that evaluates your organization across five critical dimensions — and produces a transformation blueprint grounded in evidence.</p>
+<p style="font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:32px;">The Diagnostic ensures that every engagement is grounded in evidence, not assumptions. It also protects both sides by ensuring the right scope, the right pathway, and the right level of support. Only after the Diagnostic do we design the transformation blueprint and determine the appropriate engagement structure.</p>
+<a class="btn-teal" href="booking.html" style="display:inline-block;">Book the Stratiix Path Diagnostic™ →</a>
+</div>
+<div class="fade-right">
+<div class="diag-visual">
+<div class="diag-visual-glow"></div>
+<div class="diag-visual-label">The Stratiix Path Diagnostic™</div>
+<div class="diag-entry">
+<div class="diag-entry-label">Entry Point — Every Engagement Starts Here</div>
+<div class="diag-entry-title">Stratiix Path Diagnostic™</div>
+<div class="diag-entry-tags">
+<span class="diag-entry-tag">Leadership Interviews</span>
+<span class="diag-entry-tag">Team Alignment Mapping</span>
+<span class="diag-entry-tag">Operational Assessment</span>
+<span class="diag-entry-tag">Systems Review</span>
+<span class="diag-entry-tag">Capability Scoring</span>
+<span class="diag-entry-tag">Transformation Roadmap</span>
+</div>
+</div>
+<div class="diag-arrow">
+<div class="diag-arrow-line">
+<div class="diag-arrow-shaft"></div>
+<div class="diag-arrow-head"></div>
+</div>
+</div>
+<div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.25);margin-bottom:10px;">Five Evaluation Dimensions</div>
+<div class="diag-outcomes">
+<div class="diag-outcome"><div class="diag-outcome-icon">🔗</div><div class="diag-outcome-text">Organizational Alignment</div></div>
+<div class="diag-outcome"><div class="diag-outcome-icon">💡</div><div class="diag-outcome-text">Leadership Clarity</div></div>
+<div class="diag-outcome"><div class="diag-outcome-icon">⚡</div><div class="diag-outcome-text">Execution Capacity</div></div>
+<div class="diag-outcome"><div class="diag-outcome-icon">🏛️</div><div class="diag-outcome-text">Governance Maturity</div></div>
+<div class="diag-outcome"><div class="diag-outcome-icon">⚙️</div><div class="diag-outcome-text">System Readiness</div></div>
+</div>
+<div class="diag-result">
+<div class="diag-result-label">You Walk Away With</div>
+<div class="diag-result-text">A transformation blueprint and customized Stratiix Path™ — your prioritized roadmap for what to build first, next, and later.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ FOUR OUTCOMES ══ -->
+<section class="outcomes-section section-pad" id="outcomes">
+<div class="wrap">
+<div class="outcomes-intro fade-up">
+<span class="eyebrow" style="color:var(--teal);">Four Core Outcomes</span>
+<h2 class="section-title" style="color:var(--charcoal);">How Stratiix supports<br/>organizational transformation.</h2>
+<p class="section-sub" style="margin:0 auto;">Stratiix engagements focus on four core transformation outcomes. Your specific pathway is always customized based on the Diagnostic — but these four outcomes form the foundation of every engagement.</p>
+</div>
+<div class="outcomes-grid">
+<div class="outcome-card oc1 fade-up">
+<div class="outcome-card-header">
+<div class="outcome-num">01</div>
+<div class="outcome-icon">🔍</div>
+<div class="outcome-title">Organizational Clarity</div>
+<div class="outcome-subtitle">Where decisions stall, roles overlap, and communication breaks down.</div>
+</div>
+<div class="outcome-card-body">
+<div class="outcome-desc">We identify where decisions stall, where roles overlap, and where communication breaks down. The Diagnostic provides a clear picture of how your organization currently functions — and where it needs to evolve.</div>
+<div class="outcome-points">
+<div class="outcome-point"><div class="outcome-point-dot"></div>Decision-making clarity across all levels</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Role definition and accountability mapping</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Communication architecture that scales</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Structural gap identification and resolution</div>
+</div>
+</div>
+</div>
+<div class="outcome-card oc2 fade-up d1">
+<div class="outcome-card-header">
+<div class="outcome-num">02</div>
+<div class="outcome-icon">🏛️</div>
+<div class="outcome-title">Structural Strength</div>
+<div class="outcome-subtitle">Governance, frameworks, and architecture for sustainable performance.</div>
+</div>
+<div class="outcome-card-body">
+<div class="outcome-desc">We design the governance, frameworks, and internal architecture that support sustainable performance. This includes leadership rhythm, decision-rights, accountability structures, and operating models.</div>
+<div class="outcome-points">
+<div class="outcome-point"><div class="outcome-point-dot"></div>Governance design and leadership rhythm</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Decision-rights and accountability frameworks</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Operating models built for your scale</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Internal architecture that holds under pressure</div>
+</div>
+</div>
+</div>
+<div class="outcome-card oc3 fade-up d2">
+<div class="outcome-card-header">
+<div class="outcome-num">03</div>
+<div class="outcome-icon">🚀</div>
+<div class="outcome-title">Execution Discipline</div>
+<div class="outcome-subtitle">Where planning becomes performance.</div>
+</div>
+<div class="outcome-card-body">
+<div class="outcome-desc">We help organizations translate strategy into action with the cadence, tools, and oversight required to deliver results. This is where planning becomes performance — consistently, predictably, and without founder dependency.</div>
+<div class="outcome-points">
+<div class="outcome-point"><div class="outcome-point-dot"></div>Strategy-to-execution translation systems</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Performance cadence and delivery rhythms</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Oversight and reporting structures</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Predictable, team-driven delivery</div>
+</div>
+</div>
+</div>
+<div class="outcome-card oc4 fade-up d3">
+<div class="outcome-card-header">
+<div class="outcome-num">04</div>
+<div class="outcome-icon">📈</div>
+<div class="outcome-title">Capability &amp; Maturity Growth</div>
+<div class="outcome-subtitle">Skills, clarity, and confidence to operate within a stronger system.</div>
+</div>
+<div class="outcome-card-body">
+<div class="outcome-desc">We support leaders and teams in developing the skills, clarity, and confidence needed to operate within a stronger system. Capability growth is not a training programme — it is embedded in how the system is designed and run.</div>
+<div class="outcome-points">
+<div class="outcome-point"><div class="outcome-point-dot"></div>Leadership capability and clarity development</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Team competency frameworks</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Organizational maturity progression</div>
+<div class="outcome-point"><div class="outcome-point-dot"></div>Confidence to operate without the founder</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ WHAT ENGAGEMENTS INCLUDE ══ -->
+<section class="include-section section-pad" id="include">
+<div class="wrap">
+<div class="include-grid">
+<div class="fade-left">
+<span class="eyebrow" style="color:var(--teal);">What Engagements May Include</span>
+<h2 class="section-title" style="color:var(--charcoal);">The specifics are tailored.<br/>The methodology is proprietary.</h2>
+<p class="section-sub" style="margin-bottom:24px;">Depending on your organization's needs, a Stratiix engagement may involve elements such as those listed here. These components are combined into a transformation pathway designed specifically for your context, size, maturity, and goals.</p>
+<div class="include-note">
+<div class="include-note-label">Important</div>
+<div class="include-note-text">We do not publish detailed service menus or proprietary frameworks publicly. All specifics are shared privately after the Diagnostic to protect client confidentiality and Stratiix intellectual property.</div>
+</div>
+</div>
+<div class="fade-right">
+<div class="include-right">
+<div class="include-item">
+<div class="include-item-icon">🏛️</div>
+<div class="include-item-text">Governance and leadership alignment</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">🗺️</div>
+<div class="include-item-text">Decision-rights and accountability mapping</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">📋</div>
+<div class="include-item-text">Project and portfolio execution systems</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">🎓</div>
+<div class="include-item-text">Capability and competency frameworks</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">📊</div>
+<div class="include-item-text">Performance and reporting structures</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">🔍</div>
+<div class="include-item-text">Organizational diagnostics and transformation blueprints</div>
+</div>
+<div class="include-item">
+<div class="include-item-icon">🤝</div>
+<div class="include-item-text">Ongoing execution support</div>
+</div>
+</div>
+<div class="include-ip-box">
+<div class="include-ip-label">Intellectual Property Protection</div>
+<div class="include-ip-text">The Stratiix methodology, frameworks, and proprietary tools are shared exclusively within active engagements. This protects the integrity of the work and the confidentiality of every client we serve.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ ENGAGEMENT APPROACH ══ -->
+<section class="approach-section section-pad" id="approach">
+<div class="wrap">
+<div class="approach-grid">
+<div class="fade-left">
+<span class="eyebrow" style="color:var(--mint-deep);">Our Engagement Approach</span>
+<h2 class="section-title" style="color:#fff;">The Diagnostic is the<br/>gateway to all transformation work.</h2>
+<p class="section-sub" style="color:rgba(255,255,255,0.5);margin-bottom:8px;">Every partnership begins with the Diagnostic. No exceptions. This is the rule that protects the quality of every outcome.</p>
+<div class="approach-steps">
+<div class="approach-step">
+<div class="approach-step-num">1</div>
+<div>
+<div class="approach-step-title">Complete the Diagnostic</div>
+<div class="approach-step-desc">A structured 90-minute session evaluating your organization across five critical dimensions. Grounded in evidence, not assumptions.</div>
+</div>
+</div>
+<div class="approach-step">
+<div class="approach-step-num">2</div>
+<div>
+<div class="approach-step-title">Receive Your Stratiix Path™</div>
+<div class="approach-step-desc">Within 5 business days, you receive your transformation blueprint — a prioritized roadmap for what to build first, next, and later.</div>
+</div>
+</div>
+<div class="approach-step">
+<div class="approach-step-num">3</div>
+<div>
+<div class="approach-step-title">Design the Engagement</div>
+<div class="approach-step-desc">Based on the Diagnostic findings, we design the appropriate engagement structure — scope, modules, timeline, and support model.</div>
+</div>
+</div>
+<div class="approach-step">
+<div class="approach-step-num">4</div>
+<div>
+<div class="approach-step-title">Install the OS</div>
+<div class="approach-step-desc">We build and install the operating infrastructure. Your team runs it. The founder steps back. The system steps forward.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="fade-right">
+<div class="approach-eval">
+<div class="approach-eval-title">The Diagnostic Evaluates</div>
+<div class="approach-eval-items">
+<div class="approach-eval-item">
+<div class="approach-eval-icon">🔗</div>
+<div class="approach-eval-text">
+<div class="approach-eval-name">Organizational Alignment</div>
+<div class="approach-eval-desc">How well your teams, goals, and systems are aligned</div>
+</div>
+<div class="approach-eval-bar"><div class="approach-eval-fill" style="width:85%;"></div></div>
+</div>
+<div class="approach-eval-item">
+<div class="approach-eval-icon">💡</div>
+<div class="approach-eval-text">
+<div class="approach-eval-name">Leadership Clarity</div>
+<div class="approach-eval-desc">Decision-making quality and leadership effectiveness</div>
+</div>
+<div class="approach-eval-bar"><div class="approach-eval-fill" style="width:75%;"></div></div>
+</div>
+<div class="approach-eval-item">
+<div class="approach-eval-icon">⚡</div>
+<div class="approach-eval-text">
+<div class="approach-eval-name">Execution Capacity</div>
+<div class="approach-eval-desc">Your organization's ability to deliver consistently</div>
+</div>
+<div class="approach-eval-bar"><div class="approach-eval-fill" style="width:65%;"></div></div>
+</div>
+<div class="approach-eval-item">
+<div class="approach-eval-icon">🏛️</div>
+<div class="approach-eval-text">
+<div class="approach-eval-name">Governance Maturity</div>
+<div class="approach-eval-desc">Accountability structures and decision-rights clarity</div>
+</div>
+<div class="approach-eval-bar"><div class="approach-eval-fill" style="width:70%;"></div></div>
+</div>
+<div class="approach-eval-item">
+<div class="approach-eval-icon">⚙️</div>
+<div class="approach-eval-text">
+<div class="approach-eval-name">System Readiness</div>
+<div class="approach-eval-desc">Infrastructure and process maturity for transformation</div>
+</div>
+<div class="approach-eval-bar"><div class="approach-eval-fill" style="width:60%;"></div></div>
+</div>
+</div>
+<div class="approach-guarantee">
+<div class="approach-guarantee-label">The Guarantee</div>
+<div class="approach-guarantee-text">The Diagnostic ensures that every engagement is grounded in evidence. It protects both sides by ensuring the right scope, the right pathway, and the right level of support — before any commitment is made.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ WHO WE WORK WITH ══ -->
+<section class="who-section section-pad" id="who">
+<div class="wrap">
+<div class="fade-up">
+<span class="eyebrow" style="color:var(--teal-dark);">Who We Work With</span>
+<h2 class="section-title" style="color:var(--charcoal);">Organizations that value<br/>intentionality and systems-level thinking.</h2>
+<p class="section-sub">Our work is best suited for organizations that are ready to build with intention, lead with clarity, and execute with discipline.</p>
+</div>
+<div class="who-grid">
+<div class="who-card fade-up">
+<div class="who-icon">🌱</div>
+<div class="who-title">Founder-Led Businesses Entering a New Stage</div>
+<div class="who-desc">Organizations that have outgrown their current systems and are ready to professionalize operations without losing momentum or culture.</div>
+</div>
+<div class="who-card fade-up d1">
+<div class="who-icon">⚡</div>
+<div class="who-title">Organizations Experiencing Operational Friction</div>
+<div class="who-desc">Teams where execution is inconsistent, decisions are slow, or misalignment is creating drag — and leadership is ready to address the root cause.</div>
+</div>
+<div class="who-card fade-up d2">
+<div class="who-icon">🔄</div>
+<div class="who-title">Teams Preparing for Transformation</div>
+<div class="who-desc">Organizations approaching restructuring, rapid growth, or a significant strategic shift — and needing the internal architecture to support it.</div>
+</div>
+<div class="who-card fade-up">
+<div class="who-icon">💡</div>
+<div class="who-title">Leaders Who Need Clarity and Structure</div>
+<div class="who-desc">Founders and executives who know something is wrong but can't pinpoint exactly what — and need a structured, evidence-based assessment to find out.</div>
+</div>
+<div class="who-card fade-up d1">
+<div class="who-icon">🌐</div>
+<div class="who-title">Institutions Seeking Modern Governance</div>
+<div class="who-desc">Governments, ministries, and ecosystem builders that need to align multiple stakeholders, deliver at scale, and build infrastructure that connects regions.</div>
+</div>
+<div class="who-card fade-up d2">
+<div class="who-icon">🤝</div>
+<div class="who-title">Strategic Partners and Referral Networks</div>
+<div class="who-desc">Accountants, coaches, advisors, and agencies who work with founder-led businesses and want a trusted systems partner to refer clients to.</div>
+</div>
+</div>
+<div class="who-fit fade-up">
+<div class="who-fit-text">
+<div class="who-fit-label">Best Fit</div>
+<div class="who-fit-title">Our work is best suited for organizations that value intentionality, accountability, and systems-level thinking.</div>
+<div class="who-fit-desc">If your organization is ready to build clarity, strengthen its internal architecture, and execute with discipline — the first step is completing the Stratiix Diagnostic.</div>
+</div>
+<div class="who-fit-cta">
+<a class="btn-gold" href="booking.html">Begin with the Diagnostic →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ CLOSING STATEMENT ══ -->
+<section class="closing-section section-pad" id="closing">
+<div class="wrap">
+<div class="closing-inner fade-up">
+<span class="eyebrow" style="color:var(--teal);text-align:center;display:block;">The Stratiix Standard</span>
+<h2 class="section-title" style="color:var(--charcoal);text-align:center;">Begin with the<br/>Stratiix Diagnostic.</h2>
+<p style="font-size:16px;color:var(--body-text);line-height:1.75;text-align:center;max-width:600px;margin:0 auto;">If your organization is ready to build clarity, strengthen its internal architecture, and execute with discipline — the first step is completing the Stratiix Diagnostic.</p>
+<div class="closing-divider"></div>
+<div class="closing-words">
+<div class="closing-word cw1">Build with intention.</div>
+<div class="closing-word cw2">Lead with clarity.</div>
+<div class="closing-word cw3">Execute with confidence.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ CTA ══ -->
+<section class="cta-section section-pad" id="cta">
+<div class="cta-bg"></div>
+<div class="wrap">
+<div class="cta-inner fade-up">
+<span class="cta-eyebrow">Ready to Start</span>
+<h2 class="cta-headline">The first step is<br/><span>the Diagnostic.</span></h2>
+<p class="cta-sub">Every Stratiix engagement begins here. A structured clarity session that reveals what's working, what's not, and what must change — then produces your customized transformation roadmap.</p>
+<div class="cta-btns">
+<a class="btn-cta-primary" href="booking.html">Book the Stratiix Path Diagnostic™</a>
+<a class="btn-cta-gold" href="booking.html">💳 Pay &amp; Sign Now</a>
+<a class="btn-cta-secondary" href="os.html">Explore the OS →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ══ FOOTER ══ -->
+<footer>
+<div>
+<div class="footer-logo-text">Stratiix</div>
+<div class="footer-tagline">The Transformation Operating System™</div>
+</div>
+<div class="footer-links">
+<a class="footer-link" href="index.html">Home</a>
+<a class="footer-link" href="os.html">The OS</a>
+<a class="footer-link" href="services.html">Services</a>
+<a class="footer-link" href="index.html#ladder">Service Ladder</a>
+<a class="footer-link" href="booking.html">Book Diagnostic</a>
+</div>
+<div class="footer-copy">© 2026 Stratiix. All rights reserved.</div>
+</footer>
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .closing-word').forEach(el => observer.observe(el));
+
+  // Particles
+  const container = document.createElement('div');
+  container.style.cssText = 'position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;';
+  document.querySelector('.hero').appendChild(container);
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.style.cssText = `position:absolute;border-radius:50%;background:rgba(13,148,136,0.5);width:${Math.random()*3+1}px;height:${Math.random()*3+1}px;left:${Math.random()*100}%;animation:particleFloat ${Math.random()*15+10}s linear ${Math.random()*15}s infinite;`;
+    container.appendChild(p);
+  }
+  const style = document.createElement('style');
+  style.textContent = '@keyframes particleFloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100px) scale(1);opacity:0}}';
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
