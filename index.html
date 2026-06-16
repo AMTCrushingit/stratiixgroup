@@ -84,8 +84,55 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: #0D1520;
+    background: #080E1A;
     z-index: 0;
+  }
+  /* Architectural geometry lines */
+  .hero-arch {
+    position: absolute; inset: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-arch svg {
+    position: absolute;
+    width: 100%; height: 100%;
+    opacity: 0.18;
+  }
+  /* Blueprint grid */
+  .hero-blueprint {
+    position: absolute; inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px),
+      linear-gradient(rgba(14,165,233,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14,165,233,0.03) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 30px 30px, 30px 30px;
+    mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 10%, transparent 100%);
+  }
+  /* Central light source */
+  .hero-light {
+    position: absolute;
+    top: 35%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(13,148,136,0.18) 0%, rgba(14,165,233,0.08) 30%, transparent 70%);
+    z-index: 1;
+    animation: lightPulse 4s ease-in-out infinite;
+  }
+  @keyframes lightPulse {
+    0%,100% { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.08); }
+  }
+  /* Gold accent glow */
+  .hero-gold-glow {
+    position: absolute;
+    bottom: 20%; right: 15%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,106,0.08) 0%, transparent 70%);
+    z-index: 1;
+    animation: orbFloat2 14s ease-in-out infinite;
   }
   /* Animated gradient orbs */
   .hero-orb {
@@ -508,29 +555,59 @@
 </div>
 <!-- ══ HERO ══ -->
 <section class="hero" id="home">
-<div class="hero-bg"></div>
+<div class="hero-bg">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+</div>
+<div class="hero-blueprint"></div>
+<div class="hero-arch">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="0" x2="720" y2="450" stroke="#0EA5E9" stroke-width="0.8"/>
+    <line x1="1440" y1="0" x2="720" y2="450" stroke="#0EA5E9" stroke-width="0.8"/>
+    <line x1="0" y1="900" x2="720" y2="450" stroke="#0EA5E9" stroke-width="0.8"/>
+    <line x1="1440" y1="900" x2="720" y2="450" stroke="#0EA5E9" stroke-width="0.8"/>
+    <line x1="0" y1="450" x2="720" y2="450" stroke="#0EA5E9" stroke-width="0.4"/>
+    <line x1="720" y1="0" x2="720" y2="900" stroke="#0EA5E9" stroke-width="0.4"/>
+    <polygon points="200,100 720,350 1240,100" fill="none" stroke="#5BB8A8" stroke-width="0.6"/>
+    <polygon points="200,800 720,550 1240,800" fill="none" stroke="#5BB8A8" stroke-width="0.6"/>
+    <polygon points="100,450 720,200 1340,450 720,700" fill="none" stroke="#0EA5E9" stroke-width="0.35"/>
+    <line x1="300" y1="150" x2="720" y2="450" stroke="#C9A86A" stroke-width="0.7"/>
+    <line x1="1140" y1="150" x2="720" y2="450" stroke="#C9A86A" stroke-width="0.7"/>
+    <rect x="60" y="40" width="1320" height="820" fill="none" stroke="#0EA5E9" stroke-width="0.4" rx="4"/>
+    <rect x="120" y="80" width="1200" height="740" fill="none" stroke="#5BB8A8" stroke-width="0.25" rx="2"/>
+    <path d="M60,40 L120,40 M60,40 L60,100" stroke="#C9A86A" stroke-width="1.5"/>
+    <path d="M1380,40 L1320,40 M1380,40 L1380,100" stroke="#C9A86A" stroke-width="1.5"/>
+    <path d="M60,860 L120,860 M60,860 L60,800" stroke="#C9A86A" stroke-width="1.5"/>
+    <path d="M1380,860 L1320,860 M1380,860 L1380,800" stroke="#C9A86A" stroke-width="1.5"/>
+    <circle cx="720" cy="450" r="80" fill="none" stroke="#0D9488" stroke-width="0.6"/>
+    <circle cx="720" cy="450" r="50" fill="none" stroke="#0D9488" stroke-width="0.4"/>
+    <circle cx="720" cy="450" r="5" fill="#0D9488" opacity="0.6"/>
+  </svg>
+</div>
+<div class="hero-light"></div>
+<div class="hero-gold-glow"></div>
+<div class="hero-particles" id="heroParticles"></div>
 <div class="hero-overlay"></div>
-<div class="hero-content">
-<div class="hero-eyebrow">
-<div class="eyebrow-dot"></div>
-      The Transformation Operating System™
-    </div>
-<h1 class="hero-headline">Two Levels of Impact.</h1>
-<span class="hero-headline-2">One System That <span class="accent">Scales With Ambition.</span></span>
-<p class="hero-sub">
-      Stratiix installs the <strong>workflows, governance, and execution systems</strong> your business needs — so your team runs efficiently and your business stops depending on you.
-    </p>
-<div class="hero-ctas">
-<a class="btn-primary" href="booking.html">Book the Stratiix Path Diagnostic™</a>
-<a href="booking.html" style="background:var(--gold);color:#1E1F22;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;box-shadow:0 4px 24px rgba(201,168,106,0.35);transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:8px;">&#128179; Pay &amp; Sign Now</a>
-<a class="btn-ghost" href="#levels">See Two Levels of Impact →</a>
-</div>
-<div class="hero-stats">
-<div class="hero-stat"><div class="stat-val r">1</div><div class="stat-lbl">Operating<br/>System</div></div>
-<div class="hero-stat"><div class="stat-val t">1</div><div class="stat-lbl">Repeatable<br/>Methodology</div></div>
-<div class="hero-stat"><div class="stat-val a">6</div><div class="stat-lbl">Modular<br/>Building Blocks</div></div>
-<div class="hero-stat"><div class="stat-val g">2</div><div class="stat-lbl">Levels of<br/>Impact</div></div>
-</div>
+<div class="hero-content" style="position:relative;z-index:3;">
+  <div class="hero-eyebrow">
+    <div class="eyebrow-dot"></div>
+    The Transformation Operating System™
+  </div>
+  <h1 class="hero-headline" style="font-size:56px;letter-spacing:-2px;line-height:1.06;margin-bottom:16px;">The Operating System That Turns<br><span style="color:var(--mint-deep);">Strategy Into Disciplined Execution.</span></h1>
+  <p class="hero-sub" style="font-size:18px;max-width:660px;margin:0 auto 14px;color:rgba(255,255,255,0.65);">
+    Stratiix installs the <strong>governance, workflows, and operating rhythms</strong> your organization needs — so decisions are clearer, teams stay aligned, and execution becomes consistent instead of founder-dependent.
+  </p>
+  <p style="font-size:14px;color:rgba(255,255,255,0.32);max-width:540px;margin:0 auto 36px;line-height:1.65;font-style:italic;">
+    Built for founders who need structure, clarity, and disciplined execution — not more effort.
+  </p>
+  <div class="hero-ctas" style="margin-bottom:32px;">
+    <a class="btn-primary" href="booking.html" style="font-size:16px;padding:18px 36px;border-radius:13px;">Start With the Stratiix Diagnostic →</a>
+    <a href="booking.html" style="background:var(--gold);color:#1E1F22;font-size:15px;font-weight:700;padding:16px 32px;border-radius:12px;box-shadow:0 4px 24px rgba(201,168,106,0.35);transition:background 0.2s,transform 0.15s;display:inline-flex;align-items:center;gap:8px;">💳 Pay &amp; Sign Now</a>
+  </div>
+  <p style="font-size:11px;color:rgba(255,255,255,0.2);max-width:520px;margin:0 auto;line-height:1.65;letter-spacing:0.3px;">
+    Developed from real-world experience leading strategy, governance, and execution across complex, multi-stakeholder environments.
+  </p>
 </div>
 </section>
 <!-- ══ PROBLEM ══ -->
@@ -539,18 +616,20 @@
 <div class="problem-grid">
 <div>
 <span class="section-eyebrow problem-eyebrow">The Founder Problem</span>
-<h2 class="section-title problem-title">You're not the<br/>problem.<br/>The structure is.</h2>
-<p class="section-sub problem-sub">Most founders aren't failing at leadership — they're carrying an organization that outgrew its systems.</p>
+<h2 class="section-title problem-title">When Everything Depends<br/>on the Founder,<br/>Growth Stalls.</h2>
+<p class="section-sub problem-sub">Founder-led organizations move fast — until the weight of decisions, coordination, and execution begins to bottleneck the business. What once felt agile starts to feel chaotic.</p>
+<p style="font-size:14px;color:var(--muted);line-height:1.7;margin-top:16px;margin-bottom:16px;">Teams wait for direction. Priorities shift constantly. Progress becomes inconsistent. It’s not a lack of ambition. <strong style="color:var(--charcoal);">It’s a lack of structure.</strong></p>
+<p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">Without clear governance, defined workflows, and a disciplined operating rhythm, the founder becomes the system — the decision-maker, the project manager, the communicator, the problem-solver. That model works… until it doesn’t.</p>
 <div class="truth-box">
 <div class="truth-label">The Stratiix Truth</div>
-<div class="truth-text">"Your business shouldn't run because <span>you're holding it together.</span>"</div>
+<div class="truth-text">Stratiix exists to replace founder-dependency with <span>organizational clarity, alignment, and execution discipline</span> — so the business can scale without burning out the person who built it.</div>
 </div>
 </div>
 <div class="problem-cards">
-<div class="problem-card fade-up"><div class="pc-icon">⚡</div><div><div class="pc-title">Workflows break under growth</div><div class="pc-desc">What worked at 5 people doesn't work at 15. Manual processes create bottlenecks that slow everything down.</div></div></div>
-<div class="problem-card fade-up fade-up-delay-1"><div class="pc-icon">📡</div><div><div class="pc-title">Communication fragments</div><div class="pc-desc">Teams operate in silos. Decisions get made in hallways. Alignment disappears as the organization grows.</div></div></div>
-<div class="problem-card fade-up fade-up-delay-2"><div class="pc-icon">🎯</div><div><div class="pc-title">Delivery becomes unpredictable</div><div class="pc-desc">Without systems, execution depends on who's available and how much energy the founder has that week.</div></div></div>
-<div class="problem-card fade-up fade-up-delay-3"><div class="pc-icon">🔒</div><div><div class="pc-title">The founder becomes the bottleneck</div><div class="pc-desc">Every decision, every approval, every escalation lands on one desk. The business can't move without you.</div></div></div>
+<div class="problem-card fade-up"><div class="pc-icon">⚡</div><div><div class="pc-title">Decisions stall without the founder</div><div class="pc-desc">Every approval, every escalation, every judgment call lands on one desk. The business can’t move without you in the room.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-1"><div class="pc-icon">📡</div><div><div class="pc-title">Teams lose alignment as you scale</div><div class="pc-desc">Communication fragments. Priorities shift. Teams operate in silos. Coordination becomes a full-time job for the founder.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-2"><div class="pc-icon">🎯</div><div><div class="pc-title">Execution becomes inconsistent</div><div class="pc-desc">Without operating rhythms and governance, delivery depends on who’s available and how much energy the founder has that week.</div></div></div>
+<div class="problem-card fade-up fade-up-delay-3"><div class="pc-icon">📊</div><div><div class="pc-title">Growth exposes structural gaps</div><div class="pc-desc">What worked at 5 people breaks at 15. The systems that supported early growth can’t carry the weight of the next stage.</div></div></div>
 </div>
 </div>
 </div>
@@ -778,32 +857,31 @@
 <div class="section-wrap">
 <div class="diag-layout">
 <div>
-<span class="section-eyebrow diag-eyebrow">The Starting Point</span>
-<h2 class="section-title diag-title">Start with the<br/>Stratiix Path<br/>Diagnostic™</h2>
-<p class="section-sub diag-sub">Every engagement starts here. A structured clarity session that reveals what's working, what's not, and what must change — then produces your customized Stratiix Path™.</p>
-<p style="font-size:13px;color:var(--muted);margin-top:16px;line-height:1.65;">If your business feels heavier than it should, you don't need more effort — you need structure. The Diagnostic gives you a clear baseline, a readiness score, and a build sequence for what to fix first.</p>
+<span class="section-eyebrow diag-eyebrow">The Gateway</span>
+<h2 class="section-title diag-title">The Stratiix Diagnostic:<br/>Your First Step Toward<br/>Organizational Clarity.</h2>
+<p class="section-sub diag-sub">Every Stratiix engagement begins with the Diagnostic — a structured assessment that reveals how your organization currently operates and where friction is slowing you down.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:16px;line-height:1.7;">The Diagnostic is not a survey. It’s not a coaching intake. It’s a <strong style="color:var(--charcoal);">performance-grade organizational assessment</strong> that becomes the foundation for your transformation pathway.</p>
+<p style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.7;">Once complete, you receive a decision-ready blueprint outlining the structural, governance, and execution systems your organization needs — and the sequence to build them.</p>
 <div class="diag-ctas">
-<a class="btn-navy" href="booking.html">Book the Diagnostic</a>
-<a class="btn-outline-navy" href="#ladder">See All Services</a>
+<a class="btn-navy" href="booking.html">Start With the Stratiix Diagnostic →</a>
+<a class="btn-outline-navy" href="services.html">Explore Services</a>
 </div>
 </div>
 <div class="diag-card">
-<div class="dc-label">What's Included</div>
+<div class="dc-label">The Diagnostic Evaluates</div>
 <div class="dc-title">Stratiix Path Diagnostic™</div>
-<div class="dc-sub">20+ question structured clarity session — premium, thorough, and built to produce a real roadmap.</div>
+<div class="dc-sub">A performance-grade organizational assessment — structured, evidence-based, and built to produce a decision-ready transformation blueprint.</div>
 <div class="dc-items">
-<div class="dc-item"><div class="dc-item-icon">🎙️</div>Leadership interviews</div>
-<div class="dc-item"><div class="dc-item-icon">🗺️</div>Team alignment mapping</div>
-<div class="dc-item"><div class="dc-item-icon">⚙️</div>Operational + structural assessment</div>
-<div class="dc-item"><div class="dc-item-icon">💬</div>Culture + communication analysis</div>
-<div class="dc-item"><div class="dc-item-icon">🔍</div>Systems + process review</div>
-<div class="dc-item"><div class="dc-item-icon">📈</div>Capability + readiness scoring</div>
-<div class="dc-item"><div class="dc-item-icon">🗂️</div>Full transformation roadmap</div>
-<div class="dc-item"><div class="dc-item-icon">🛤️</div>Your customized Stratiix Path™</div>
+<div class="dc-item"><div class="dc-item-icon">💡</div>Decision-making clarity across all levels</div>
+<div class="dc-item"><div class="dc-item-icon">🤝</div>Leadership alignment and effectiveness</div>
+<div class="dc-item"><div class="dc-item-icon">⚡</div>Execution capacity and delivery consistency</div>
+<div class="dc-item"><div class="dc-item-icon">⚙️</div>Workflow and process maturity</div>
+<div class="dc-item"><div class="dc-item-icon">🏛️</div>Operating rhythm and accountability</div>
+<div class="dc-item"><div class="dc-item-icon">📈</div>System readiness for the next stage of growth</div>
 </div>
 <div class="dc-output">
 <div class="dc-out-label">You Walk Away With</div>
-<div class="dc-out-text">A structured "here's what's missing" map + a priority sequence for what to build first, next, and later.</div>
+<div class="dc-out-text">A decision-ready blueprint outlining the structural, governance, and execution systems your organization needs — and the exact sequence to build them.</div>
 </div>
 </div>
 </div>
